@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/**', 'scripts/**', '.github/workflows/update.yml']
+    paths: ['src/**', 'scripts/**', 'data/**', '.github/workflows/update.yml']
 
 permissions:
   contents: write
@@ -26,16 +26,21 @@ jobs:
         with:
           node-version: 22
 
+      # incentivi.gov.it spesso non risponde agli IP esteri dei runner GitHub.
+      # In quel caso si ricostruisce con gli ultimi dati salvati (spinti ogni mattina da un PC in Italia).
       - name: Scarica i bandi da incentivi.gov.it
+        id: fetch
+        continue-on-error: true
         run: node scripts/fetch.mjs
 
       - name: Salva i dati del giorno nel repository
+        if: steps.fetch.outcome == 'success'
         run: |
           git config user.name "radar-bandi-bot"
           git config user.email "radar-bandi-bot@users.noreply.github.com"
           git add data/
           git diff --cached --quiet || git commit -m "Dati bandi $(date -u +%F)"
-          git push
+          git pull --rebase --quiet && git push
 
       - name: Costruisci il sito
         run: node scripts/build.mjs

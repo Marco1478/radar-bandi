@@ -28,11 +28,23 @@ const FIELDS = [
 
 async function download() {
   const params = new URLSearchParams({ q: '*:*', rows: '10000', wt: 'json', fl: FIELDS.join(',') });
-  const res = await fetch(`${SOLR}?${params}`, {
-    headers: { 'User-Agent': 'RadarBandi/0.1 (riuso open data IODL 2.0; aggiornamento giornaliero)' },
-  });
-  if (!res.ok) throw new Error(`Solr HTTP ${res.status}`);
-  const json = await res.json();
+  // Il portale a volte rifiuta connessioni da IP esteri o risponde lento: 3 tentativi prima di arrendersi.
+  let json;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(`${SOLR}?${params}`, {
+        headers: { 'User-Agent': 'RadarBandi/0.1 (riuso open data IODL 2.0; aggiornamento giornaliero)' },
+        signal: AbortSignal.timeout(120_000),
+      });
+      if (!res.ok) throw new Error(`Solr HTTP ${res.status}`);
+      json = await res.json();
+      break;
+    } catch (e) {
+      if (attempt === 3) throw e;
+      console.warn(`Tentativo ${attempt} fallito (${e.cause?.code || e.message}), riprovo…`);
+      await new Promise((r) => setTimeout(r, attempt * 5000));
+    }
+  }
   const docs = json.response?.docs ?? [];
   if (docs.length < 1000) throw new Error(`Solo ${docs.length} documenti: risposta sospetta, mi fermo`);
   return docs;

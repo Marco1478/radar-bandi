@@ -239,7 +239,7 @@ async function init() {
   try {
     const res = await fetch(`${BASE}/data/index.json`);
     const json = await res.json();
-    data = json.b;
+    data = json.b.filter((b) => !b.c || b.c >= TODAY); // chiusi dopo l'ultima build: fuori
     meta = json.meta;
   } catch {
     list.innerHTML = `<li class="empty"><strong>Non riesco a caricare i bandi.</strong>Controlla la connessione e ricarica la pagina.</li>`;

@@ -13,7 +13,12 @@ const TODAY = new Date().toISOString().slice(0, 10);
 const BASE = new URL(SITE_URL).pathname.replace(/\/$/, '');
 const withBase = (html) => html.replace(/(href|src)="\/(?!\/)/g, `$1="${BASE}/`).replace('<html lang="it">', `<html lang="it" data-base="${BASE}">`);
 
-const { meta, bandi } = JSON.parse(await readFile(join(ROOT, 'data', 'bandi.json'), 'utf8'));
+const data = JSON.parse(await readFile(join(ROOT, 'data', 'bandi.json'), 'utf8'));
+// I dati possono avere qualche giorno (se il download fallisce si ricostruisce con gli ultimi salvati):
+// i bandi chiusi nel frattempo spariscono comunque, e la data mostrata è quella dei dati, non della build.
+const bandi = data.bandi.filter((b) => !b.close || b.close >= TODAY);
+const DATA_DATE = data.meta.generated.slice(0, 10);
+const meta = { ...data.meta, live: bandi.length, open: bandi.filter((b) => b.open <= TODAY).length, upcoming: bandi.filter((b) => b.open > TODAY).length };
 
 // ---------- helper ----------
 export const slugify = (s) =>
@@ -106,7 +111,7 @@ const footer = `<footer class="foot">
   <p><strong>Radar Bandi non è un sito della Pubblica Amministrazione.</strong> Rielabora gli open data di
   <a href="https://www.incentivi.gov.it/it/open-data" rel="noopener">incentivi.gov.it</a> (Ministero delle Imprese e del Made in Italy),
   pubblicati con licenza <a href="https://www.dati.gov.it/iodl/2.0/" rel="noopener">IODL 2.0</a>. Controlla sempre il bando ufficiale prima di presentare domanda.</p>
-  <p>Dati aggiornati il ${fmtDate(TODAY)}. Nessun cookie, nessun tracciamento: le tue risposte restano nel tuo browser.</p>
+  <p>Dati aggiornati il ${fmtDate(DATA_DATE)}. Nessun cookie, nessun tracciamento: le tue risposte restano nel tuo browser.</p>
 </footer>`;
 
 function factRow(label, value) {
@@ -264,14 +269,14 @@ index = index
   .replaceAll('{{OPEN}}', String(meta.open))
   .replaceAll('{{LIVE}}', String(meta.live))
   .replaceAll('{{UPCOMING}}', String(meta.upcoming))
-  .replaceAll('{{DATE}}', fmtDate(TODAY))
+  .replaceAll('{{DATE}}', fmtDate(DATA_DATE))
   .replaceAll('{{SITE_URL}}', SITE_URL)
   .replace('{{REGION_OPTIONS}}', regions.map((r) => `<option value="${esc(shortRegion(r))}">${esc(shortRegion(r))}</option>`).join(''));
 await writeFile(indexPath, withBase(index));
 
 for (const p of ['come-funziona/index.html']) {
   const f = join(DIST, p);
-  await writeFile(f, withBase(await readFile(f, 'utf8')).replaceAll('{{DATE}}', fmtDate(TODAY)).replaceAll('{{SITE_URL}}', SITE_URL).replaceAll('{{LIVE}}', String(meta.live)));
+  await writeFile(f, withBase(await readFile(f, 'utf8')).replaceAll('{{DATE}}', fmtDate(DATA_DATE)).replaceAll('{{SITE_URL}}', SITE_URL).replaceAll('{{LIVE}}', String(meta.live)));
 }
 
 await writeFile(
