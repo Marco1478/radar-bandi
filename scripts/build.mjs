@@ -139,6 +139,18 @@ const footer = `<footer class="foot">
   <p>Dati aggiornati il ${fmtDate(DATA_DATE)}. Nessun cookie, nessun tracciamento: le tue risposte restano nel tuo browser.</p>
 </footer>`;
 
+// Segnalazioni: una issue precompilata sul repository pubblico (serve un account GitHub a chi segnala).
+const REPO = process.env.GITHUB_REPOSITORY || 'Marco1478/radar-bandi';
+function reportUrl(b) {
+  const title = `Errore nel bando ${b.id}: ${b.title}`.slice(0, 120);
+  const body = `Pagina: ${SITE_URL}/bando/${b.slug}/
+Scheda ufficiale: ${b.portal}
+
+Cosa non va (scadenza, importo, regione, requisiti, bando chiuso…):
+`;
+  return `https://github.com/${REPO}/issues/new?${new URLSearchParams({ title, body, labels: 'segnalazione' })}`;
+}
+
 function factRow(label, value) {
   return value ? `<div class="fact"><dt>${label}</dt><dd>${value}</dd></div>` : '';
 }
@@ -181,7 +193,8 @@ function bandoPage(b, similar) {
   ${section('A chi si rivolge', b.chi)}
   ${section('Cosa prevede', b.cosa)}
   <dl class="facts">${facts}</dl>
-  <p class="source">Scheda ufficiale: <a href="${esc(b.portal)}" rel="noopener">incentivi.gov.it</a> · ultimo aggiornamento della fonte ${fmtDate(b.updated)}</p>
+  <p class="source">Scheda ufficiale: <a href="${esc(b.portal)}" rel="noopener">incentivi.gov.it</a> · ultimo aggiornamento della fonte ${fmtDate(b.updated)} ·
+  <a href="${esc(reportUrl(b))}" rel="noopener">Segnala un errore</a></p>
   ${similar.length ? `<section class="similar"><h2>Altri bandi con lo stesso obiettivo</h2><ul class="tab">${similar.map(rowHtml).join('')}</ul></section>` : ''}
 </main>
 ${footer}`;
