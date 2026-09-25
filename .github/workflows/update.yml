@@ -61,3 +61,17 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Dopo la pubblicazione: segnala ai motori di ricerca (IndexNow) i bandi comparsi negli ultimi giorni.
+  ping:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: IndexNow
+        run: node scripts/indexnow.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}

@@ -91,6 +91,11 @@ function pageShell({ title, description, canonical, body, extraHead = '' }) {
 <link rel="canonical" href="${esc(canonical)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="${esc(canonical)}">
+<meta property="og:image" content="${SITE_URL}/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F7F8F4">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
