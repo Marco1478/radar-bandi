@@ -242,6 +242,18 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 .page h2 { margin: 34px 0 8px; font-size: 22px; }
 .page p, .page li { max-width: 66ch; }
 
+/* ---------- pagine tematiche e navigazione per regione ---------- */
+.landing { max-width: 860px; }
+.landing .lede { font-size: 18px; color: var(--inchiostro); max-width: 66ch; }
+.landing h2 { margin: 36px 0 12px; }
+.landing .btn { margin: 0 8px 8px 0; }
+.count { font: 400 12px/1 var(--f-dati); color: var(--grigio); }
+.goal-links, .region-nav ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 20px; }
+.goal-links li, .region-nav li { padding: 6px 0; border-bottom: 1px solid var(--banda-riga); }
+.region-nav { padding: 8px 0 48px; }
+.region-nav h2 { margin-bottom: 14px; }
+.region-nav p { margin-top: 16px; }
+
 /* ---------- footer ---------- */
 .foot {
   max-width: var(--wrap); margin: 0 auto; padding: 22px 16px 40px;

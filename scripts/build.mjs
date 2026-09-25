@@ -210,7 +210,7 @@ ${footer}`;
 // Stessa riga usata dal matcher lato browser (app.js la ricostruisce identica).
 function rowHtml(b) {
   const st = stamp(b);
-  return `<li><a class="row" href="/bando/${b.slug}/"><span class="stamp ${st.cls}">${st.text}</span><span class="row-title">${esc(b.title)}</span><span class="row-meta">${[aidLabel(b), b.forms[0], whereLabel(b)].filter(Boolean).map(esc).join(' · ')}</span></a></li>`;
+  return `<li><a class="row" href="/bando/${b.slug}/"><span class="stamp ${st.cls}">${st.text}</span><span class="row-title">${esc(b.title)}</span>${b.summary ? `<span class="row-sum">${esc(b.summary)}</span>` : ''}<span class="row-meta">${[aidLabel(b), b.forms[0], whereLabel(b)].filter(Boolean).map(esc).join(' · ')}</span></a></li>`;
 }
 
 // ---------- calendario ICS ----------
@@ -338,10 +338,125 @@ for (const p of ['come-funziona/index.html']) {
   await writeFile(f, withBase(await readFile(f, 'utf8')).replaceAll('{{DATE}}', fmtDate(DATA_DATE)).replaceAll('{{SITE_URL}}', SITE_URL).replaceAll('{{LIVE}}', String(meta.live)));
 }
 
+// ---------- pagine per la ricerca: regione, regione × obiettivo, nazionali, scadenze, nuovi ----------
+// Ogni pagina risponde a una ricerca reale ("bandi Lombardia", "contributi macchinari Veneto"...).
+// Le pagine regione × obiettivo esistono solo con almeno 3 bandi specifici: niente pagine vuote.
+const GOAL_PAGES = {
+  macchinari: { label: 'macchinari e attrezzature', costs: ['Impianti/Macchinari/Attrezzature'] },
+  digitale: { label: 'digitalizzazione', scopes: ['Digitalizzazione'] },
+  assunzioni: { label: 'assunzioni', costs: ['Costo del personale'] },
+  formazione: { label: 'formazione del personale', costs: ['Formazione Professionale'], scopes: ['Formazione (lavoro, occupazione, riqualificazione professionale dei lavoratori)'] },
+  export: { label: 'export e fiere internazionali', scopes: ['Internazionalizzazione'] },
+  energia: { label: 'energia e transizione ecologica', scopes: ['Transizione ecologica'] },
+  immobili: { label: 'locali e immobili', costs: ['Fabbricati e terreni'] },
+  ricerca: { label: 'ricerca e innovazione', scopes: ['Innovazione e ricerca'] },
+  'nuove-imprese': { label: 'avviare un’impresa', scopes: ["Start up/Sviluppo d'impresa", 'Imprenditoria giovanile', 'Imprenditoria femminile'] },
+  liquidita: { label: 'liquidità e imprese in difficoltà', scopes: ['Sostegno liquidità', "Crisi d'impresa", 'Rafforzamento del capitale'] },
+};
+const GOAL_QUERY = { assunzioni: 'personale', 'nuove-imprese': 'avvio' }; // slug pagina → valore del matcher
+const isSpecificFor = (b, g) =>
+  (g.scopes || []).some((s) => b.scopes.includes(s)) && b.scopes.length <= 3 ||
+  (g.costs || []).some((c) => b.costs.includes(c)) && b.costs.length <= 3;
+const isOpenNow = (b) => b.open <= TODAY;
+const byClose = (x, y) => (x.open > TODAY) - (y.open > TODAY) || isStale(x) - isStale(y) || (x.close || '9999').localeCompare(y.close || '9999');
+const MONTH_LONG = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+const monthYear = `${MONTH_LONG[+DATA_DATE.slice(5, 7) - 1]} ${DATA_DATE.slice(0, 4)}`;
+const ul = (items) => `<ul class="tab">${items.map(rowHtml).join('')}</ul>`;
+const extraUrls = [];
+
+async function writePage(path, { title, description, body }) {
+  const dir = join(DIST, path);
+  await mkdir(dir, { recursive: true });
+  const canonical = `${SITE_URL}/${path}/`;
+  await writeFile(join(dir, 'index.html'), withBase(pageShell({ title, description, canonical, body: `${header}\n<main class="wrap page landing">${body}</main>\n${footer}` })));
+  extraUrls.push(canonical);
+}
+
+function statLine(items) {
+  const open = items.filter(isOpenNow);
+  const fp = open.filter((b) => b.forms.includes('Contributo/Fondo perduto')).length;
+  const soon = open.filter((b) => b.close && daysTo(b.close) <= 30).length;
+  return { open: open.length, fp, soon };
+}
+
+const nationals = bandi.filter((b) => b.national).sort(byClose);
+const regionLinks = [];
+
+for (const r of regions) {
+  const name = shortRegion(r);
+  const slug = slugify(name);
+  const local = bandi.filter((b) => !b.national && b.regions.includes(r)).sort(byClose);
+  const s = statLine(local);
+  const soon = local.filter((b) => isOpenNow(b) && b.close && daysTo(b.close) <= 30);
+
+  // regione × obiettivo
+  const goalLinks = [];
+  for (const [gslug, g] of Object.entries(GOAL_PAGES)) {
+    const locG = local.filter((b) => isSpecificFor(b, g));
+    const natG = nationals.filter((b) => isSpecificFor(b, g));
+    if (locG.length < 2 || locG.length + natG.length < 3) continue; // senza bandi locali sarebbe una copia della pagina nazionale
+    const fpG = [...locG, ...natG].filter((b) => isOpenNow(b) && b.forms.includes('Contributo/Fondo perduto')).length;
+    goalLinks.push(`<li><a href="/regione/${slug}/${gslug}/">${esc(g.label[0].toUpperCase() + g.label.slice(1))}</a> <span class="count">${locG.length + natG.length}</span></li>`);
+    await writePage(`regione/${slug}/${gslug}`, {
+      title: `Bandi e contributi per ${g.label} in ${name} — ${monthYear} | Radar Bandi`,
+      description: `${locG.length + natG.length} bandi aperti per ${g.label} utilizzabili in ${name}, ${fpG} a fondo perduto. Scadenze, importi e requisiti in breve. Aggiornato il ${fmtDate(DATA_DATE)}.`,
+      body: `<a class="back" href="/regione/${slug}/">← Tutti i bandi in ${esc(name)}</a>
+  <h1>Bandi per ${esc(g.label)} in ${esc(name)}</h1>
+  <p class="lede">${locG.length} bandi regionali e locali più ${natG.length} nazionali finanziano specificamente ${esc(g.label)}; ${fpG} sono a fondo perduto. Ordinati per scadenza, dati del ${fmtDate(DATA_DATE)}.</p>
+  <p><a class="btn primary" href="/?r=${encodeURIComponent(name)}&amp;g=${GOAL_QUERY[gslug] || gslug}">Filtra per la tua attività</a></p>
+  ${locG.length ? `<h2>In ${esc(name)}</h2>${ul(locG)}` : ''}
+  ${natG.length ? `<h2>Nazionali, validi anche in ${esc(name)}</h2>${ul(natG)}` : ''}`,
+    });
+  }
+
+  await writePage(`regione/${slug}`, {
+    title: `Bandi e contributi aperti in ${name} — ${monthYear} | Radar Bandi`,
+    description: `${s.open} bandi regionali e locali aperti in ${name}, ${s.fp} a fondo perduto, ${s.soon} in scadenza entro 30 giorni, più ${nationals.length} nazionali. Aggiornato il ${fmtDate(DATA_DATE)}.`,
+    body: `<h1>Bandi e contributi aperti in ${esc(name)}</h1>
+  <p class="lede">Oggi ci sono <strong>${s.open} bandi</strong> di Regione, camere di commercio e comuni aperti in ${esc(name)}: ${s.fp} a fondo perduto, ${s.soon} scadono entro 30 giorni. A questi si aggiungono <a href="/nazionali/">${nationals.length} bandi nazionali</a> validi in tutta Italia. Dati del ${fmtDate(DATA_DATE)}.</p>
+  <p><a class="btn primary" href="/?r=${encodeURIComponent(name)}">Trova quelli adatti alla tua attività</a> <a class="btn" href="/feeds/${slug}.ics">Scadenze nel calendario</a></p>
+  ${goalLinks.length ? `<h2>Per obiettivo</h2><ul class="goal-links">${goalLinks.join('')}</ul>` : ''}
+  ${soon.length ? `<h2>Scadono entro 30 giorni</h2>${ul(soon)}` : ''}
+  <h2>Tutti i bandi in ${esc(name)}</h2>${ul(local.filter((b) => !soon.includes(b)))}`,
+  });
+  regionLinks.push({ name, slug, n: s.open });
+}
+
+await writePage('nazionali', {
+  title: `Bandi e incentivi nazionali aperti — ${monthYear} | Radar Bandi`,
+  description: `${nationals.filter(isOpenNow).length} bandi e incentivi nazionali aperti in tutta Italia: Nuova Sabatini, Smart&Start, crediti d'imposta, voucher e fondi di garanzia. Riassunti in breve e scadenze.`,
+  body: `<h1>Bandi e incentivi nazionali</h1>
+  <p class="lede">${nationals.filter(isOpenNow).length} misure valide in tutta Italia, ognuna con un riassunto in italiano semplice. Dati del ${fmtDate(DATA_DATE)}.</p>
+  ${ul(nationals)}`,
+});
+
+const closingSoon = bandi.filter((b) => isOpenNow(b) && b.close && daysTo(b.close) <= 30).sort(byClose);
+await writePage('scadenze', {
+  title: `Bandi in scadenza nei prossimi 30 giorni — ${monthYear} | Radar Bandi`,
+  description: `${closingSoon.length} bandi e contributi pubblici in scadenza entro 30 giorni in Italia, ordinati per data. Aggiornato ogni giorno.`,
+  body: `<h1>Bandi in scadenza nei prossimi 30 giorni</h1>
+  <p class="lede">${closingSoon.length} bandi chiudono entro 30 giorni. Dati del ${fmtDate(DATA_DATE)}.</p>
+  ${ul(closingSoon)}`,
+});
+
+const fresh = bandi.filter((b) => b.open && daysTo(b.open) >= -30).sort((x, y) => y.open.localeCompare(x.open));
+await writePage('nuovi', {
+  title: `Nuovi bandi aperti negli ultimi 30 giorni — ${monthYear} | Radar Bandi`,
+  description: `${fresh.length} bandi e contributi pubblici aperti o in apertura negli ultimi 30 giorni in Italia. Aggiornato ogni giorno.`,
+  body: `<h1>Nuovi bandi</h1>
+  <p class="lede">${fresh.length} bandi aperti negli ultimi 30 giorni o in arrivo. Dati del ${fmtDate(DATA_DATE)}.</p>
+  ${ul(fresh)}`,
+});
+
+// collegamenti dalla home: servono anche ai motori di ricerca per trovare le pagine
+const regionNav = `<nav class="region-nav" aria-labelledby="rn"><h2 id="rn">Bandi per regione</h2><ul>${regionLinks.map((r) => `<li><a href="/regione/${r.slug}/">${esc(r.name)}</a> <span class="count">${r.n}</span></li>`).join('')}</ul><p><a href="/nazionali/">Nazionali</a> · <a href="/scadenze/">In scadenza</a> · <a href="/nuovi/">Nuovi</a></p></nav>`;
+await writeFile(indexPath, (await readFile(indexPath, 'utf8')).replace('<!--REGION_NAV-->', withBase(regionNav)));
+
 await writeFile(
   join(DIST, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE_URL}/</loc><lastmod>${TODAY}</lastmod></url>\n<url><loc>${SITE_URL}/come-funziona/</loc></url>\n${bandi.map((b) => `<url><loc>${SITE_URL}/bando/${b.slug}/</loc><lastmod>${b.updated || TODAY}</lastmod></url>`).join('\n')}\n</urlset>\n`,
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE_URL}/</loc><lastmod>${TODAY}</lastmod></url>\n<url><loc>${SITE_URL}/come-funziona/</loc></url>\n${extraUrls.map((u) => `<url><loc>${u}</loc><lastmod>${DATA_DATE}</lastmod></url>`).join('\n')}\n${bandi.map((b) => `<url><loc>${SITE_URL}/bando/${b.slug}/</loc><lastmod>${b.updated || TODAY}</lastmod></url>`).join('\n')}\n</urlset>\n`,
 );
+await writeFile(join(DIST, 'data', 'pages.json'), JSON.stringify(extraUrls));
 await writeFile(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
-console.log(`Build OK: ${bandi.length} pagine bando, ${regions.length + 1} feed calendario → dist/`);
+console.log(`Build OK: ${bandi.length} pagine bando, ${extraUrls.length} pagine tematiche, ${regions.length + 1} feed calendario → dist/`);

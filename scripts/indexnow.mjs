@@ -17,6 +17,8 @@ const since = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
 const all = process.argv.includes('--all');
 const pages = bandi.filter((b) => all || b.firstSeen >= since).map((b) => `${SITE_URL}/bando/${b.slug}/`);
 if (all) pages.unshift(`${SITE_URL}/`, `${SITE_URL}/come-funziona/`);
+// Le pagine tematiche cambiano ogni giorno (conteggi, scadenze): si segnalano sempre.
+try { pages.push(...JSON.parse(await readFile(join(ROOT, 'dist', 'data', 'pages.json'), 'utf8'))); } catch {}
 if (!pages.length) {
   console.log('Nessuna pagina nuova da segnalare.');
   process.exit(0);
