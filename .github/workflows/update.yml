@@ -1,0 +1,58 @@
+name: Radar Bandi — aggiornamento giornaliero
+
+on:
+  schedule:
+    - cron: '15 4 * * *' # ogni mattina alle 06:15 ora italiana (estate)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/**', 'scripts/**', '.github/workflows/update.yml']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar-bandi
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Scarica i bandi da incentivi.gov.it
+        run: node scripts/fetch.mjs
+
+      - name: Salva i dati del giorno nel repository
+        run: |
+          git config user.name "radar-bandi-bot"
+          git config user.email "radar-bandi-bot@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Dati bandi $(date -u +%F)"
+          git push
+
+      - name: Costruisci il sito
+        run: node scripts/build.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

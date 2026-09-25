@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Bandi — i bandi aperti per la tua attività, oggi</title>
+<meta name="description" content="{{OPEN}} bandi e incentivi pubblici aperti in Italia. Rispondi a cinque domande e scopri quali puoi chiedere per la tua impresa, partita IVA o startup. Gratis, senza registrazione.">
+<link rel="canonical" href="{{SITE_URL}}/">
+<meta property="og:title" content="Radar Bandi — quali soldi pubblici puoi chiedere oggi?">
+<meta property="og:description" content="{{OPEN}} bandi aperti in Italia, filtrati per la tua attività in cinque domande. Gratis, senza registrazione.">
+<meta name="theme-color" content="#F7F8F4">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Martian+Mono:wght@400;600&family=Schibsted+Grotesk:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="bar"><a class="brand" href="/"><span class="brand-cell">R</span><span class="brand-cell">B</span> Radar Bandi</a><a class="bar-link" href="/come-funziona/">Come funziona</a></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Aggiornato il {{DATE}} · fonte: incentivi.gov.it</p>
+    <h1>Soldi pubblici per la tua attività: quali puoi chiedere oggi?</h1>
+    <div class="counter" aria-live="polite">
+      <span class="cells" id="cells" aria-hidden="true"></span>
+      <span class="counter-label" id="counter-label">bandi e incentivi aperti in Italia</span>
+      <span class="visually-hidden" id="counter-sr">{{OPEN}} bandi e incentivi aperti in Italia</span>
+    </div>
+    <p class="lede">Rispondi a cinque domande. Niente registrazione, niente email: le risposte restano sul tuo dispositivo.</p>
+  </section>
+
+  <div class="layout">
+    <form class="modulo" id="modulo" autocomplete="off">
+      <fieldset>
+        <legend><span class="q">1</span> Dove ha sede l’attività?</legend>
+        <select name="r" id="f-r">
+          <option value="">Scegli la regione</option>
+          {{REGION_OPTIONS}}
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="q">2</span> Chi sei?</legend>
+        <div class="chips" data-single>
+          <label><input type="radio" name="chi" value="attiva"><span>Ho un’impresa</span></label>
+          <label><input type="radio" name="chi" value="nuova"><span>Sto per aprirla</span></label>
+          <label><input type="radio" name="chi" value="pro"><span>Libero professionista</span></label>
+          <label><input type="radio" name="chi" value="noprofit"><span>Associazione o cooperativa</span></label>
+          <label><input type="radio" name="chi" value="privato"><span>Privato cittadino</span></label>
+        </div>
+        <div class="chips small">
+          <label><input type="checkbox" name="fem" value="1"><span>Guidata da donne</span></label>
+          <label><input type="checkbox" name="gio" value="1"><span>Under 35</span></label>
+          <label><input type="checkbox" name="inn" value="1"><span>Startup o PMI innovativa</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset id="fs-dim">
+        <legend><span class="q">3</span> Quante persone lavorano con te?</legend>
+        <div class="chips" data-single>
+          <label><input type="radio" name="dim" value="Microimpresa"><span>Meno di 10</span></label>
+          <label><input type="radio" name="dim" value="Piccola Impresa"><span>10–49</span></label>
+          <label><input type="radio" name="dim" value="Media Impresa"><span>50–249</span></label>
+          <label><input type="radio" name="dim" value="Grande Impresa"><span>250 o più</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="q">4</span> Cosa vuoi finanziare? <span class="hint">anche più di una</span></legend>
+        <div class="chips">
+          <label><input type="checkbox" name="g" value="macchinari"><span>Macchinari e attrezzature</span></label>
+          <label><input type="checkbox" name="g" value="digitale"><span>Digitale e software</span></label>
+          <label><input type="checkbox" name="g" value="personale"><span>Assumere</span></label>
+          <label><input type="checkbox" name="g" value="formazione"><span>Formazione</span></label>
+          <label><input type="checkbox" name="g" value="export"><span>Export e fiere</span></label>
+          <label><input type="checkbox" name="g" value="energia"><span>Energia e ambiente</span></label>
+          <label><input type="checkbox" name="g" value="immobili"><span>Locali e immobili</span></label>
+          <label><input type="checkbox" name="g" value="ricerca"><span>Ricerca e innovazione</span></label>
+          <label><input type="checkbox" name="g" value="avvio"><span>Avviare o far crescere l’attività</span></label>
+          <label><input type="checkbox" name="g" value="liquidita"><span>Liquidità o difficoltà</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="q">5</span> Che tipo di aiuto cerchi?</legend>
+        <div class="chips" data-single>
+          <label><input type="radio" name="fp" value="" checked><span>Qualsiasi</span></label>
+          <label><input type="radio" name="fp" value="1"><span>Solo fondo perduto</span></label>
+        </div>
+      </fieldset>
+
+      <button type="button" class="reset" id="reset">Ricomincia da capo</button>
+    </form>
+
+    <a class="btn primary jump" id="jump" href="#results" hidden>Vedi i bandi</a>
+    <section class="results" id="results" aria-labelledby="res-title">
+      <div class="res-head">
+        <h2 id="res-title">I bandi</h2>
+        <label class="sort">Ordina per
+          <select id="sort">
+            <option value="close">scadenza più vicina</option>
+            <option value="aid">importo più alto</option>
+            <option value="new">aperti di recente</option>
+          </select>
+        </label>
+      </div>
+      <p class="res-tools" id="res-tools" hidden>
+        <a class="btn" id="dl-ics" href="#">Scarica queste scadenze nel calendario</a>
+        <a class="btn ghost" id="sub-ics" href="#" hidden>Ricevi ogni nuovo bando della regione nel calendario</a>
+      </p>
+      <ul class="tab" id="list">
+        <li class="loading">Carico i bandi…</li>
+      </ul>
+      <button type="button" class="btn more" id="more" hidden>Mostra altri</button>
+      <noscript><p>Per filtrare i bandi serve JavaScript. Puoi comunque sfogliarli dalla <a href="/sitemap.xml">mappa del sito</a>.</p></noscript>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <p><strong>Radar Bandi non è un sito della Pubblica Amministrazione.</strong> Rielabora gli open data di
+  <a href="https://www.incentivi.gov.it/it/open-data" rel="noopener">incentivi.gov.it</a> (Ministero delle Imprese e del Made in Italy),
+  pubblicati con licenza <a href="https://www.dati.gov.it/iodl/2.0/" rel="noopener">IODL 2.0</a>. Controlla sempre il bando ufficiale prima di presentare domanda.</p>
+  <p>Dati aggiornati il {{DATE}}. Nessun cookie, nessun tracciamento: le tue risposte restano nel tuo browser.</p>
+</footer>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

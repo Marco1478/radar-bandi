@@ -1,0 +1,14 @@
+{
+  "name": "radar-bandi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "I bandi e gli incentivi pubblici aperti in Italia, filtrati per la tua attività. Open data incentivi.gov.it.",
+  "type": "module",
+  "scripts": {
+    "fetch": "node scripts/fetch.mjs",
+    "build": "node scripts/build.mjs",
+    "update": "node scripts/fetch.mjs && node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
