@@ -97,5 +97,43 @@
    "Cooperative/Associazioni Non Profit"
   ],
   "why": "Rivolto a enti del Terzo settore; la fonte indica 'SU/PMI innovativa'"
+ },
+ "4412": {
+  "regions": [
+   "Trentino-Alto Adige/Südtirol"
+  ],
+  "why": "Bando della Provincia di Bolzano; la fonte aggiunge Veneto, FVG, Emilia-Romagna"
+ },
+ "6520": {
+  "regions": [
+   "Trentino-Alto Adige/Südtirol"
+  ],
+  "why": "Legge provinciale di Trento; la fonte aggiunge Veneto, FVG, Emilia-Romagna"
+ },
+ "461": {
+  "regions": [
+   "Lombardia"
+  ],
+  "why": "Microcredito di Regione Lombardia; la fonte aggiunge Liguria, Piemonte, Valle d'Aosta"
+ },
+ "813": {
+  "checked": "multiregione",
+  "why": "Interreg Italia-Austria: aree di confine su più regioni"
+ },
+ "814": {
+  "checked": "multiregione",
+  "why": "Interreg Italia-Austria: aree di confine su più regioni"
+ },
+ "815": {
+  "checked": "multiregione",
+  "why": "Interreg Italia-Austria: aree di confine su più regioni"
+ },
+ "816": {
+  "checked": "multiregione",
+  "why": "Interreg Italia-Austria: aree di confine su più regioni"
+ },
+ "7620": {
+  "checked": "multiregione",
+  "why": "Interreg Italia-Slovenia: provincia di Venezia e FVG"
  }
 }

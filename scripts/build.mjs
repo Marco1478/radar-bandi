@@ -272,11 +272,22 @@ function ics(name, items) {
 
 // ---------- controllo qualità: "nazionali" che sembrano locali ----------
 const LOCAL_HINT = /\b(Regione|Provincia autonoma|Provincia di|CCIAA|Camera di commercio|Comune di|Film Commission)\b/i;
-const anomalies = bandi
+let anomalies = bandi
   .filter((b) => b.national && !overrides[b.id] && (LOCAL_HINT.test(b.title) || LOCAL_HINT.test(b.ente)))
   .map((b) => ({ id: b.id, title: b.title, ente: b.ente }));
+// Secondo schema: il titolo/ente nomina un solo territorio ma la fonte elenca più regioni.
+const TERRITORY = { Bolzano: 'Trentino-Alto Adige', Trento: 'Trentino-Alto Adige', Trentino: 'Trentino-Alto Adige' };
+const regionShort = (r) => r.split('/')[0];
+const REGION_NAMES = [...new Set(bandi.flatMap((b) => b.regions.map(regionShort)))].filter((r) => r !== 'Estero');
+for (const b of bandi) {
+  if (b.national || overrides[b.id] || b.regions.length < 2) continue;
+  const text = `${b.title} ${b.ente}`;
+  const named = new Set(REGION_NAMES.filter((r) => new RegExp(`\\b${r.split('-')[0]}\\b`, 'i').test(text)));
+  for (const [k, v] of Object.entries(TERRITORY)) if (new RegExp(`\\b${k}\\b`).test(text)) named.add(v);
+  if (named.size === 1) anomalies.push({ id: b.id, title: b.title, ente: b.ente, regions: b.regions.map(regionShort), note: `nomina solo ${[...named][0]}` });
+}
 await writeFile(join(ROOT, 'data', 'anomalies.json'), JSON.stringify(anomalies, null, 1));
-if (anomalies.length) console.warn(`Da controllare: ${anomalies.length} bandi "nazionali" con indizi locali → data/anomalies.json`);
+if (anomalies.length) console.warn(`Da controllare: ${anomalies.length} possibili errori di territorio nella fonte → data/anomalies.json`);
 
 // ---------- build ----------
 await rm(DIST, { recursive: true, force: true });
