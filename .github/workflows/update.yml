@@ -72,6 +72,6 @@ jobs:
         with:
           node-version: 22
       - name: IndexNow
-        run: node scripts/indexnow.mjs
+        run: node scripts/build.mjs && node scripts/indexnow.mjs
         env:
           SITE_URL: ${{ vars.SITE_URL }}
