@@ -199,6 +199,38 @@ function render({ resetPaging = true } = {}) {
   const q = answersToQuery(a);
   history.replaceState(null, '', q ? `?${q}` : location.pathname);
   current = withDeadline;
+  lastFound = found;
+  lastAnswers = a;
+}
+
+let lastFound = [];
+let lastAnswers = null;
+
+// ---------- stampa: un resoconto da portare al commercialista ----------
+const CHI_LABEL = { attiva: 'impresa attiva', nuova: 'impresa da aprire', pro: 'libero professionista', noprofit: 'associazione o cooperativa', privato: 'privato cittadino' };
+const DIM_LABEL = { Microimpresa: 'meno di 10 addetti', 'Piccola Impresa': '10–49 addetti', 'Media Impresa': '50–249 addetti', 'Grande Impresa': '250 o più addetti' };
+const GOAL_LABEL = { macchinari: 'macchinari', digitale: 'digitale', personale: 'assunzioni', formazione: 'formazione', export: 'export e fiere', energia: 'energia e ambiente', immobili: 'locali e immobili', ricerca: 'ricerca e innovazione', avvio: 'avvio o crescita', liquidita: 'liquidità' };
+
+function printProfile(a) {
+  const parts = [
+    a.r || 'tutta Italia',
+    CHI_LABEL[a.chi],
+    a.fem && 'guidata da donne',
+    a.gio && 'under 35',
+    a.inn && 'startup o PMI innovativa',
+    a.chi === 'attiva' && DIM_LABEL[a.dim],
+    a.g.length && 'per: ' + a.g.map((g) => GOAL_LABEL[g]).join(', '),
+    a.fp && 'solo fondo perduto',
+  ].filter(Boolean);
+  return parts.join(' · ');
+}
+
+function preparePrint() {
+  const a = lastAnswers || readAnswers();
+  const today = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+  $('#print-head').innerHTML = `<p><strong>Radar Bandi — resoconto del ${today}</strong></p><p>Profilo: ${esc(printProfile(a))}</p><p>${lastFound.length} bandi trovati. Verifica sempre requisiti e scadenze sul bando ufficiale. Fonte: incentivi.gov.it (MIMIT), IODL 2.0.</p>`;
+  list.innerHTML = lastFound.map(row).join('');
+  list.querySelectorAll('a.row').forEach((el) => el.insertAdjacentHTML('beforeend', `<span class="print-url">${esc(el.href)}</span>`));
 }
 
 let current = [];
@@ -268,6 +300,9 @@ async function init() {
     form.reset();
     render();
   });
+  $('#print').addEventListener('click', () => window.print());
+  window.addEventListener('beforeprint', preparePrint);
+  window.addEventListener('afterprint', () => render({ resetPaging: false }));
   $('#dl-ics').addEventListener('click', (e) => {
     e.preventDefault();
     downloadIcs();

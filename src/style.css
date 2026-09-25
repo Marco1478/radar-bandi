@@ -247,6 +247,22 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 }
 .foot p { max-width: 80ch; margin: 0 0 8px; }
 
+/* ---------- stampa ---------- */
+.print-head, .print-url { display: none; }
+@media print {
+  :root { --carta: #fff; --banda: #f1f5f1; --inchiostro: #000; --grigio: #333; --timbro: #3d2a80; }
+  body { font-size: 11pt; }
+  .bar, .hero .lede, .modulo, .res-tools, .res-head .sort, .more, .jump, .foot, .counter, .eyebrow, noscript { display: none !important; }
+  .hero { padding: 0; }
+  .hero h1 { font-size: 16pt; margin: 0 0 6pt; }
+  .layout { display: block; padding: 0; }
+  .print-head { display: block; font-size: 10pt; margin: 0 0 10pt; }
+  .print-head p { margin: 0 0 3pt; }
+  .tab > li { break-inside: avoid; }
+  .row { padding: 7pt 6pt; }
+  .print-url { display: block; font: 8pt/1.3 var(--f-dati); color: #444; word-break: break-all; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
