@@ -14,9 +14,28 @@ const BASE = new URL(SITE_URL).pathname.replace(/\/$/, '');
 const withBase = (html) => html.replace(/(href|src)="\/(?!\/)/g, `$1="${BASE}/`).replace('<html lang="it">', `<html lang="it" data-base="${BASE}">`);
 
 const data = JSON.parse(await readFile(join(ROOT, 'data', 'bandi.json'), 'utf8'));
+const readJson = async (f, fallback) => { try { return JSON.parse(await readFile(join(ROOT, 'data', f), 'utf8')); } catch { return fallback; } };
+
+// Correzioni a mano di errori evidenti nella fonte (es. bandi regionali segnati come nazionali).
+const overrides = await readJson('overrides.json', {});
+// status "closed" = verificato chiuso sul sito ufficiale → fuori; "open" = verificato aperto → niente avviso "da verificare".
+for (const b of data.bandi) {
+  const o = overrides[b.id];
+  if (!o) continue;
+  if (o.regions) Object.assign(b, { regions: o.regions, national: false });
+  if (o.forms) b.forms = o.forms;
+  if (o.status) Object.assign(b, { status: o.status, checked: o.checked, evidence: o.evidence });
+}
+
+// Riassunti "In breve": valgono solo finché la scheda ufficiale non cambia (v = data di aggiornamento della fonte).
+const summaries = await readJson('summaries.json', {});
+for (const b of data.bandi) {
+  const s = summaries[b.id];
+  b.summary = s && s.v === b.updated ? s.text : '';
+}
 // I dati possono avere qualche giorno (se il download fallisce si ricostruisce con gli ultimi salvati):
 // i bandi chiusi nel frattempo spariscono comunque, e la data mostrata è quella dei dati, non della build.
-const bandi = data.bandi.filter((b) => !b.close || b.close >= TODAY);
+const bandi = data.bandi.filter((b) => (!b.close || b.close >= TODAY) && b.status !== 'closed');
 const DATA_DATE = data.meta.generated.slice(0, 10);
 const meta = { ...data.meta, live: bandi.length, open: bandi.filter((b) => b.open <= TODAY).length, upcoming: bandi.filter((b) => b.open > TODAY).length };
 
@@ -31,7 +50,7 @@ const shortRegion = (r) => r.split('/')[0];
 const daysTo = (d) => Math.round((Date.parse(d) - Date.parse(TODAY)) / 86400000);
 // Sportello senza data di chiusura e scheda ferma da più di 18 mesi: potrebbe essere chiuso, lo diciamo.
 const STALE_DAYS = 540;
-const isStale = (b) => !b.close && (!b.updated || daysTo(b.updated) < -STALE_DAYS);
+const isStale = (b) => !b.close && b.status !== 'open' && (!b.updated || daysTo(b.updated) < -STALE_DAYS);
 
 function whereLabel(b) {
   if (b.national) return 'Tutta Italia';
@@ -67,7 +86,7 @@ const pick = (b) => ({
   l: b.comuni ? 1 : 0,
   y: b.firstSeen,
   v: isStale(b) ? 1 : 0,
-  h: (b.cose || '').slice(0, 220),
+  h: b.summary,
 });
 
 // ---------- pagina singolo bando ----------
@@ -141,7 +160,7 @@ function bandoPage(b, similar) {
   ].join('');
 
   const section = (h, t) => (t ? `<section class="prose"><h2>${h}</h2><p>${esc(t)}</p></section>` : '');
-  const desc = `${b.cose || b.title}`.slice(0, 155);
+  const desc = (b.summary || b.cose || b.title).slice(0, 158);
 
   const body = `${header}
 <main class="wrap detail">
@@ -149,11 +168,13 @@ function bandoPage(b, similar) {
   <p class="stamp ${st.cls}">${st.text}</p>
   <h1>${esc(b.title)}</h1>
   <p class="ente">${esc(b.ente)}</p>
+  ${b.summary ? `<div class="breve"><h2>In breve</h2><p>${esc(b.summary)}</p><p class="breve-note">Riassunto di Radar Bandi: in caso di dubbio fa fede il bando ufficiale.</p></div>` : ''}
   <div class="actions">
     ${b.link ? `<a class="btn primary" href="${esc(b.link)}" rel="noopener">Apri il bando ufficiale</a>` : ''}
     ${b.close ? `<a class="btn" href="scadenza.ics" download>Aggiungi la scadenza al calendario</a>` : ''}
   </div>
   ${isStale(b) ? `<p class="note warn-note">La scheda ufficiale non viene aggiornata ${b.updated ? `dal ${fmtDate(b.updated)}` : 'da tempo'}: lo sportello potrebbe essere chiuso o senza fondi. Verifica sul sito dell’ente prima di muoverti.</p>` : ''}
+  ${b.status === 'open' ? `<p class="note ok-note"><strong>Verificato il ${fmtDate(b.checked)}.</strong> ${esc(b.evidence)}</p>` : ''}
   ${b.closeNote ? `<p class="note">${esc(b.closeNote)}</p>` : ''}
   ${section('Cos’è', b.cose)}
   ${section('A chi si rivolge', b.chi)}
@@ -234,6 +255,14 @@ function ics(name, items) {
     '',
   ].join('\r\n');
 }
+
+// ---------- controllo qualità: "nazionali" che sembrano locali ----------
+const LOCAL_HINT = /\b(Regione|Provincia autonoma|Provincia di|CCIAA|Camera di commercio|Comune di|Film Commission)\b/i;
+const anomalies = bandi
+  .filter((b) => b.national && !overrides[b.id] && (LOCAL_HINT.test(b.title) || LOCAL_HINT.test(b.ente)))
+  .map((b) => ({ id: b.id, title: b.title, ente: b.ente }));
+await writeFile(join(ROOT, 'data', 'anomalies.json'), JSON.stringify(anomalies, null, 1));
+if (anomalies.length) console.warn(`Da controllare: ${anomalies.length} bandi "nazionali" con indizi locali → data/anomalies.json`);
 
 // ---------- build ----------
 await rm(DIST, { recursive: true, force: true });

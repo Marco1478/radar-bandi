@@ -1,0 +1,89 @@
+{
+ "4153": {
+  "regions": [
+   "Valle d'Aosta/Vallée d'Aoste"
+  ],
+  "why": "Nel testo: solo residenti in Valle d'Aosta; la fonte lo segna nazionale"
+ },
+ "3785": {
+  "regions": [
+   "Trentino-Alto Adige/Südtirol"
+  ],
+  "why": "Aiuto della Provincia di Trento; la fonte lo segna nazionale"
+ },
+ "7945": {
+  "regions": [
+   "Lombardia"
+  ],
+  "why": "Bando di Regione Lombardia; la fonte lo segna nazionale"
+ },
+ "8478": {
+  "regions": [
+   "Lazio",
+   "Marche"
+  ],
+  "why": "Solo territori industriali di Lazio e Marche; la fonte lo segna nazionale"
+ },
+ "8768": {
+  "regions": [
+   "Friuli-Venezia Giulia"
+  ],
+  "why": "Bando di Regione FVG; la fonte lo segna nazionale"
+ },
+ "8179": {
+  "checked": "nazionale",
+  "why": "Girato in Calabria, ma possono chiederlo case di produzione di tutta Italia/UE"
+ },
+ "8300": {
+  "checked": "nazionale",
+  "why": "Premio del Comune di Ravenna aperto a candidate di tutta Italia"
+ },
+ "52": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT (agg. 14/09/2026): rifinanziata con 650 milioni dalla Legge di Bilancio 2026, piattaforma aperta."
+ },
+ "56": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT (agg. 09/03/2026): «I termini per la presentazione delle domande sono aperti»."
+ },
+ "57": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT: «I termini per la presentazione delle domande sono aperti»."
+ },
+ "67": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT (agg. 11/06/2026): sportello aperto, nessuna chiusura comunicata."
+ },
+ "78": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito Invitalia: stato «Attivo»."
+ },
+ "81": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT (agg. 02/09/2026): «Lo sportello agevolativo è aperto»."
+ },
+ "1007": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "evidence": "Sito MIMIT (agg. 21/10/2025): termini aperti fino a esaurimento delle risorse."
+ },
+ "83": {
+  "status": "open",
+  "checked": "2026-09-25",
+  "forms": [
+   "Prestito/Anticipo rimborsabile"
+  ],
+  "evidence": "Sito MIMIT, avviso del 30/06/2026: esaurite le risorse per i contributi a fondo perduto; le agevolazioni sono concesse solo come finanziamento agevolato."
+ },
+ "181": {
+  "status": "closed",
+  "checked": "2026-09-25",
+  "evidence": "Sito ICE: «concluso il 12 aprile 2024»."
+ }
+}

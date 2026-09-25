@@ -177,6 +177,7 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 }
 .row:hover .row-title { text-decoration: underline; text-underline-offset: 3px; }
 .row-title { font-weight: 700; font-size: 17px; line-height: 1.35; }
+.row-sum { font-size: 15px; line-height: 1.45; }
 .row-meta { font: 400 12.5px/1.5 var(--f-dati); color: var(--grigio); }
 .row-meta .aid { color: var(--inchiostro); font-weight: 600; }
 
@@ -215,6 +216,10 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 @media (min-width: 960px) { .jump { display: none; } }
 .ente { color: var(--grigio); margin: 0 0 20px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.breve { border: 1.5px solid var(--timbro); border-radius: var(--r); padding: 14px 16px; margin: 0 0 22px; }
+.breve h2 { font-size: 13px; font-family: var(--f-dati); text-transform: uppercase; letter-spacing: 0.06em; color: var(--timbro); margin: 0 0 6px; }
+.breve p { margin: 0; font-size: 18px; line-height: 1.5; }
+.breve .breve-note { font-size: 13px; color: var(--grigio); margin-top: 8px; }
 .note { background: var(--timbro-tenue); border-left: 3px solid var(--timbro); padding: 12px 14px; font-size: 16px; }
 .prose h2 { font-size: 20px; margin: 30px 0 8px; }
 .prose p { margin: 0; max-width: 68ch; }
@@ -225,6 +230,7 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 .fact dd { margin: 0; }
 .warn { color: var(--urgente); }
 .warn-note { border-left-color: var(--urgente); }
+.ok-note { background: var(--banda); border-left-color: var(--inchiostro); }
 .source { font-size: 14px; color: var(--grigio); margin-top: 14px; }
 .similar { margin-top: 44px; }
 .similar h2 { margin-bottom: 12px; }

@@ -1,0 +1,377 @@
+{
+ "51": {
+  "text": "Garanzie a costo ridotto per PMI e professionisti che chiedono un prestito tramite un Confidi. Non dà soldi: abbassa il costo della garanzia rispetto al prezzo di mercato.",
+  "v": "",
+  "t": "Garanzia Confidi alle PMI"
+ },
+ "52": {
+  "text": "Per micro, piccole e medie imprese che comprano (anche in leasing) macchinari, impianti, hardware o software: un prestito bancario più un contributo del Ministero che copre gli interessi (2,75%, o 3,575% per investimenti 4.0 e green).",
+  "v": "2023-11-22",
+  "t": "Beni Strumentali - Nuova Sabatini"
+ },
+ "56": {
+  "text": "Prestito a tasso zero fino a 500.000 € per PMI e professionisti che non sono stati pagati da debitori sotto processo per truffa, estorsione, bancarotta o reati simili. Durata da 3 a 10 anni.",
+  "v": "",
+  "t": "Finanziamenti a PMI per mancati pagamenti"
+ },
+ "57": {
+  "text": "Prestiti a tasso zero da 50.000 a 2 milioni di €, senza garanzie, per imprese sequestrate o confiscate alla criminalità organizzata e per chi le ha rilevate, affittate o ne gestisce i beni.",
+  "v": "2023-11-22",
+  "t": "Finanziamenti agevolati alle imprese sequestrate o confiscat"
+ },
+ "67": {
+  "text": "Per imprese sociali, cooperative sociali e cooperative ONLUS che investono in progetti con ricadute sociali o ambientali (lavoro per persone svantaggiate, inclusione, ambiente). Mix di contributo e prestito agevolato.",
+  "v": "2023-11-16",
+  "t": "Diffusione e rafforzamento dell’economia sociale"
+ },
+ "78": {
+  "text": "Per PMI di manifattura, turismo o commercio con almeno 100.000 € di ricavi e due bilanci depositati che investono in tecnologie digitali: copre il 50% della spesa, 10% a fondo perduto e 40% come prestito agevolato.",
+  "v": "2023-11-21",
+  "t": "Digital Transformation"
+ },
+ "79": {
+  "text": "Per imprese (anche con università e centri di ricerca) che fanno ricerca e sviluppo sull'economia circolare: riuso delle risorse, trattamento dei rifiuti, nuovi processi produttivi. Contributo più prestito agevolato.",
+  "v": "2023-11-22",
+  "t": "FCS - Fondo crescita sostenibile per R&S ed economia circola"
+ },
+ "81": {
+  "text": "Per startup innovative di piccola dimensione nate da meno di 5 anni, o per chi vuole fondarne una: finanzia piani d'impresa da 100.000 € a 1,5 milioni (macchinari, brevetti, software, servizi, personale).",
+  "v": "2023-11-21",
+  "t": "Smart&Start Italia - Sostegno alle startup innovative"
+ },
+ "83": {
+  "text": "Per micro e piccole imprese nate da meno di 5 anni (o da costituire) con soci in maggioranza donne o giovani 18-35 anni: prestito a tasso zero per programmi fino a 1,5 milioni. I fondi a fondo perduto sono esauriti dal 30/06/2026.",
+  "v": "2023-11-13",
+  "t": "ON - Oltre Nuove imprese a tasso zero"
+ },
+ "84": {
+  "text": "Prestiti a tasso zero fino a 10 anni per cooperative di produzione e lavoro e cooperative sociali già partecipate da CFI (legge Marcora), per nascere, crescere o consolidarsi.",
+  "v": "2025-07-31",
+  "t": "Nuova Marcora - Cooperative di piccola e media dimensione"
+ },
+ "90": {
+  "text": "Per imprese in difficoltà economica che presentano un piano di ristrutturazione per salvare attività e posti di lavoro: lo Stato entra nel capitale come socio di minoranza, fino a 10 milioni per operazione.",
+  "v": "2026-04-08",
+  "t": "Fondo Salvaguardia imprese"
+ },
+ "118": {
+  "text": "Il principale fondo pubblico di venture capital (gestito da CDP Venture Capital): investe nel capitale di startup, scaleup e PMI innovative ad alto potenziale, a condizioni di mercato.",
+  "v": "2023-11-15",
+  "t": "Fondo Nazionale Innovazione"
+ },
+ "132": {
+  "text": "Per imprese che investono nella produzione di autobus elettrici (non ibridi) e nella loro filiera: contributi a fondo perduto e prestiti agevolati, fondi PNRR per 75 milioni di €.",
+  "v": "2025-07-08",
+  "t": "Contratti di sviluppo - \"Bus elettrici\" (PNRR)"
+ },
+ "143": {
+  "text": "Credito d'imposta per le imprese italiane che investono in ricerca e sviluppo, innovazione tecnologica (anche 4.0 e circolare), design e ideazione estetica: una parte della spesa torna come sconto sulle tasse.",
+  "v": "",
+  "t": "Credito d’imposta R&S, innovazione tecnologica, design e ide"
+ },
+ "148": {
+  "text": "Garanzia pubblica sui prestiti bancari per PMI e professionisti: ti permette di ottenere un finanziamento senza dare garanzie personali o reali sulla parte coperta dal Fondo. Non dà contributi in denaro.",
+  "v": "2025-05-26",
+  "t": "Fondo di Garanzia per le Piccole e Medie Imprese"
+ },
+ "156": {
+  "text": "Per imprese che vogliono produrre autobus elettrici (non ibridi) e connessi: contributi a fondo perduto e prestiti agevolati per investimenti, ricerca e formazione, fondi PNRR per 25 milioni di €.",
+  "v": "2025-07-08",
+  "t": "Mobilità sostenibile - Sostegno alla filiera degli autobus e"
+ },
+ "181": {
+  "text": "Contributo a fondo perduto per micro e piccole imprese manifatturiere (anche reti e consorzi) che comprano soluzioni digitali per vendere all'estero: e-commerce, app, marketing digitale, piattaforme software.",
+  "v": "2023-11-14",
+  "t": "Bonus Export Digitale"
+ },
+ "187": {
+  "text": "Credito d'imposta fino a 520 € al mese (300 € per i semiliberi) per imprese e cooperative sociali che assumono detenuti o internati per almeno un mese, con convenzione con l'istituto penitenziario.",
+  "v": "",
+  "t": "Agevolazioni fiscali finalizzate all'assunzione di dipendent"
+ },
+ "197": {
+  "text": "Prestito a tasso zero dei Confidi per PMI di ogni settore: fino a 100.000 € dai confidi minori, di cui almeno l'80% con risorse pubbliche a tasso zero.",
+  "v": "",
+  "t": "Erogazione di finanziamenti agevolati da parte dei Confidi"
+ },
+ "304": {
+  "text": "Per imprese di ogni dimensione che investono nella trasformazione e vendita di prodotti agricoli: contributo e/o prestito agevolato, fino al 60% della spesa per le piccole imprese nelle regioni del Sud.",
+  "v": "2023-12-18",
+  "t": "Contratti di sviluppo agroalimentari - Progetti di investime"
+ },
+ "359": {
+  "text": "Contributo a fondo perduto per imprenditori agricoli, imprese agroindustriali e cooperative agricole che installano pannelli fotovoltaici sui tetti dei propri fabbricati, anche con rimozione dell'amianto e isolamento.",
+  "v": "2023-12-11",
+  "t": "\"Parco Agrisolare\" - Secondo Bando - PNRR"
+ },
+ "506": {
+  "text": "Prestito agevolato di 6 anni per aprire o potenziare uffici, negozi o strutture commerciali all'estero, con fino al 10% a fondo perduto (max 100.000 €). Importo massimo 500.000 € per le micro imprese.",
+  "v": "2023-11-23",
+  "t": "Finanziamenti agevolati per la realizzazione di programmi di"
+ },
+ "509": {
+  "text": "Prestito agevolato di 6 anni per investimenti in digitale e/o transizione ecologica e per rafforzare il patrimonio delle imprese con vocazione all'export, con fino al 10% a fondo perduto (max 100.000 €).",
+  "v": "2023-11-23",
+  "t": "Finanziamento agevolato per la realizzazione di investimenti"
+ },
+ "511": {
+  "text": "Prestito agevolato di 4 anni per partecipare fino a 3 fiere, mostre o missioni internazionali (anche virtuali), con fino al 10% a fondo perduto. Fino a 500.000 € e non oltre il 20% dei ricavi.",
+  "v": "2023-11-23",
+  "t": "Finanziamenti agevolati per la partecipazione delle imprese "
+ },
+ "515": {
+  "text": "Prestito agevolato di 4 anni per inserire in azienda un Temporary Manager (tramite una società di servizi) su progetti digitali, ecologici o di export, con fino al 10% a fondo perduto. Da 10.000 a 500.000 €.",
+  "v": "2023-11-23",
+  "t": "Finanziamenti agevolati per l’inserimento temporaneo nell’Im"
+ },
+ "516": {
+  "text": "Prestito agevolato di 4 anni per creare o migliorare un e-commerce proprio o aprire uno store su un marketplace, per vendere all'estero, con fino al 10% a fondo perduto. Da 10.000 a 500.000 €.",
+  "v": "2023-11-23",
+  "t": "Finanziamento agevolato per la realizzazione di soluzioni e-"
+ },
+ "518": {
+  "text": "Prestito agevolato di 4 anni per consulenze e studi di fattibilità per crescere all'estero, e per certificazioni di prodotto, sostenibilità o proprietà intellettuale, con fino al 10% a fondo perduto.",
+  "v": "2023-11-23",
+  "t": "Finanziamenti agevolati per attività consulenziale destinata"
+ },
+ "541": {
+  "text": "Credito d'imposta dal 15% al 40% del costo di produzione per le imprese che producono opere per la TV, il web e videoclip (sessione 2023).",
+  "v": "2025-12-02",
+  "t": "Tax Credit produzione opere audiovisive - Apertura sessione "
+ },
+ "542": {
+  "text": "Credito d'imposta dal 15% al 40% del costo di produzione per le imprese che producono film (sessione 2023).",
+  "v": "2025-12-02",
+  "t": "Tax Credit Produzione opere cinematografiche - Apertura sess"
+ },
+ "596": {
+  "text": "Credito d'imposta fino all'80% delle spese per distribuire in Italia o all'estero film, opere TV o web di nazionalità italiana. Per distributori e per i produttori che distribuiscono il proprio film.",
+  "v": "2025-12-02",
+  "t": "Tax credit - Distribuzione nazionale e internazionale – Aper"
+ },
+ "600": {
+  "text": "Credito d'imposta dal 25% al 40% per le imprese italiane di produzione esecutiva e post-produzione che lavorano per produzioni estere in Italia, con almeno un giorno di riprese sul territorio.",
+  "v": "2025-12-02",
+  "t": "Tax credit per l'attrazione in Italia di investimenti cinema"
+ },
+ "822": {
+  "text": "Per grandi investimenti industriali o ambientali (almeno 20 milioni di €, 7,5 per l'agroalimentare) di una o più imprese, fino a cinque: agevolazioni negoziate con il Ministero tra prestiti e contributi.",
+  "v": "2024-01-22",
+  "t": "Contratti di sviluppo - Programmi di sviluppo industriale e "
+ },
+ "1007": {
+  "text": "Per imprese e centri di ricerca con progetti di ricerca e innovazione del Green New Deal: decarbonizzazione, economia circolare, meno plastica, rigenerazione urbana, clima. Contributi più prestiti agevolati.",
+  "v": "2024-02-05",
+  "t": "Progetti di ricerca, sviluppo e innovazione per transizione "
+ },
+ "1426": {
+  "text": "Contributo a fondo perduto fino a 650.000 € per proprietari o gestori di teatri e cinema che riducono i consumi energetici: climatizzazione, illuminazione, sicurezza. Fondi PNRR.",
+  "v": "2024-03-28",
+  "t": "Promozione dell’ecoefficienza e riduzione dei consumi energe"
+ },
+ "1523": {
+  "text": "Per imprese di qualsiasi dimensione che investono nella filiera dei semiconduttori e dei microprocessori in Italia (nuovi stabilimenti o riconversioni): prestiti e contributi da un fondo di 3,3 miliardi.",
+  "v": "2025-10-31",
+  "t": "Contratti di sviluppo - Nuovo sportello semiconduttori"
+ },
+ "1843": {
+  "text": "Contributo che abbatte, anche del tutto, gli interessi sui mutui per costruire o rinnovare impianti sportivi. Per associazioni e società sportive, imprese, enti e comuni. Si chiede tramite la banca.",
+  "v": "2024-05-31",
+  "t": "Piano Operativo Fondo Contributi Interessi"
+ },
+ "1856": {
+  "text": "Garanzia pubblica fino all'80% sui prestiti per impianti sportivi (max 5 milioni di €, fino a 25 anni) per associazioni e società sportive, imprese, federazioni e fondazioni. Costa lo 0,25-0,35% l'anno.",
+  "v": "2024-06-03",
+  "t": "Fondo di garanzia per l'impiantistica sportiva - Istituto pe"
+ },
+ "1857": {
+  "text": "Garanzia pubblica fino all'80% sui prestiti per tutelare e valorizzare il patrimonio culturale (max 2,5 milioni, fino a 20 anni), anche per imprese culturali e creative. Costa lo 0,25-0,35% l'anno.",
+  "v": "2024-06-03",
+  "t": "Comparto di garanzia patrimonio culturale - Istituto per il "
+ },
+ "1901": {
+  "text": "Contributo a fondo perduto alle imprese di autotrasporto merci per conto terzi che comprano camion pesanti elettrici, ibridi o a gas naturale. Importo fisso per tipo di veicolo, maggiorato se rottami un mezzo vecchio.",
+  "v": "2026-09-16",
+  "t": "Contributi imprese autotrasporto per investimenti veicoli ad"
+ },
+ "2195": {
+  "text": "Esonero dai contributi INPS fino a 7.500 € per ogni dottore di ricerca assunto a tempo indeterminato entro il 2026, per le imprese che cofinanziano borse di dottorato innovativo del PNRR.",
+  "v": "2024-07-17",
+  "t": "Incentivi alle imprese per l'assunzione di ricercatori - MUR"
+ },
+ "2512": {
+  "text": "Prestito agevolato per imprese italiane presenti in Africa, che esportano lì o si riforniscono lì (o che ne sono fornitrici), con fino al 10% a fondo perduto, 20% per chi ha una sede al Sud.",
+  "v": "2024-09-18",
+  "t": "Finanziamento agevolato a sostegno della presenza di imprese"
+ },
+ "2909": {
+  "text": "Contributo che abbatte, anche del tutto, gli interessi sui mutui per restaurare, tutelare o valorizzare il patrimonio culturale. Per enti, imprese culturali e creative, associazioni e università.",
+  "v": "2024-11-13",
+  "t": "Piano operativo del Comparto per contributi in conto interes"
+ },
+ "3265": {
+  "text": "Voucher per startup e microimprese che vogliono brevettare un'invenzione: paga avvocati e consulenti in proprietà industriale per verifica di brevettabilità, stesura e deposito della domanda, anche all'estero.",
+  "v": "2025-03-26",
+  "t": "Voucher 3I - Investire in innovazione"
+ },
+ "3785": {
+  "text": "Solo Provincia di Trento: aiuto agli operatori di trasporto multimodale che spostano merci su ferrovia, pari a 0,0058 € per ogni tonnellata-chilometro.",
+  "v": "2025-03-07",
+  "t": "Reintroduzione di un regime di aiuti a sostegno del trasport"
+ },
+ "3954": {
+  "text": "Bonus Giovani: chi assume a tempo indeterminato (o stabilizza) personale non dirigente non paga i contributi INPS per fino a 24 mesi, se non ha licenziato nei sei mesi precedenti.",
+  "v": "2025-05-26",
+  "t": "Regime di aiuti a sostegno dell'occupazione di determinati l"
+ },
+ "3957": {
+  "text": "Prestito agevolato per imprese italiane che investono, esportano o si riforniscono in America centrale o meridionale, con fino al 10% a fondo perduto, 20% per chi ha una sede al Sud.",
+  "v": "2025-05-26",
+  "t": "Finanziamento agevolato a sostegno della presenza di imprese"
+ },
+ "4153": {
+  "text": "Solo Valle d'Aosta: contributo a fondo perduto da 5.000 a 9.000 € per disoccupati tra i 18 e i 60 anni residenti in regione che avviano un'attività in proprio.",
+  "v": "2025-05-26",
+  "t": "AVVISO NEO IMPRESA 2025"
+ },
+ "4201": {
+  "text": "Credito d'imposta del 25-35% sul costo di produzione di opere audiovisive italiane, fino a 9 milioni di € per opera (18 in coproduzione estera), per produttori con ATECO 59.11 (sessione 2024).",
+  "v": "2025-12-02",
+  "t": "TAX CREDIT Produzione audiovisiva - Anno 2024 - Ministero de"
+ },
+ "4202": {
+  "text": "Credito d'imposta del 40% sul costo di produzione di film italiani, fino a 9 milioni di € per opera (18 in coproduzione estera), per produttori con ATECO 59.11 (sessione 2024).",
+  "v": "2025-12-02",
+  "t": "TAX CREDIT Produzione cinematografica - Anno 2024 - Minister"
+ },
+ "4208": {
+  "text": "Credito d'imposta del 40% per le imprese italiane di produzione esecutiva e post-produzione che realizzano film o opere audiovisive per produzioni estere, fino a 20 milioni di € l'anno (sessione 2024).",
+  "v": "2025-12-02",
+  "t": "TAX CREDIT Attrazione in Italia di investimenti cinematograf"
+ },
+ "4257": {
+  "text": "Contributi a fondo perduto per progetti di ricerca e sviluppo sulla robotica medica e assistenziale (progetto Fit4MedRob): per micro, piccole e medie imprese e università; le grandi imprese solo insieme a una PMI.",
+  "v": "2025-06-05",
+  "t": "Avviso pubblico per la presentazione di progetti di ricerca "
+ },
+ "4511": {
+  "text": "Programma Imprenditoria Femminile di Invitalia: orientamento, formazione, percorsi di accelerazione e contributi (grant, borse, premi) per startup e imprese femminili e per donne che vogliono avviarne una.",
+  "v": "2025-07-15",
+  "t": "Fondo Impresa Femminile Capo V - Programma Imprenditoria Fem"
+ },
+ "4952": {
+  "text": "Prestito agevolato per imprese italiane che investono, esportano o si riforniscono in India, anche per consulenze di ingresso sul mercato e negozi temporanei, con fino al 10% a fondo perduto (20% al Sud o per startup innovative).",
+  "v": "2025-10-06",
+  "t": "Finanziamento agevolato a sostegno della presenza di imprese"
+ },
+ "4958": {
+  "text": "Incentivo PNRR per comprare un veicolo elettrico nuovo rottamando un veicolo termico fino a Euro 5: per le persone fisiche (auto fino a 35.000 €, importo in base all'ISEE) e per le imprese.",
+  "v": "2025-10-07",
+  "t": "Programma di rinnovo del parco veicoli privati e commerciali"
+ },
+ "5172": {
+  "text": "Aste del GSE per incentivare impianti a fonte rinnovabile innovativi o costosi (DM FER2): chi vince la procedura competitiva riceve una tariffa incentivante sull'energia prodotta.",
+  "v": "2025-10-23",
+  "t": "Bandi per la partecipazione alle procedure competitive per l"
+ },
+ "7144": {
+  "text": "Credito d'imposta del 40% sul costo di produzione di film italiani, fino a 9 milioni di € per opera (18 in coproduzione estera), per produttori con ATECO 59.11 (sessione 2025).",
+  "v": "2025-12-03",
+  "t": "Tax credit produzione cinematografica - Anno 2025"
+ },
+ "7145": {
+  "text": "Credito d'imposta del 25-35% sul costo di produzione di opere audiovisive italiane, fino a 9 milioni di € per opera (18 in coproduzione estera), per produttori con ATECO 59.11 (sessione 2025).",
+  "v": "2025-12-03",
+  "t": "Tax credit produzione audiovisiva - Anno 2025"
+ },
+ "7585": {
+  "text": "Fino a 50.000 € a fondo perduto per startup cyber (IA, dati, robotica, IoT, blockchain, quantum, crittografia) nate da meno di 5 anni, selezionate da incubatori e acceleratori nei programmi dell'Agenzia per la cybersicurezza.",
+  "v": "2026-01-15",
+  "t": "Selezione di startup per contributi alle \"attività di valida"
+ },
+ "7945": {
+  "text": "Solo Lombardia: contributo da 2.500 a 20.000 € per enti pubblici e privati senza scopo di lucro che organizzano eventi di rilievo regionale nel 2026. Domanda almeno 60 giorni prima dell'evento.",
+  "v": "2026-08-27",
+  "t": "Regione Lombardia - Contributi per iniziative e manifestazio"
+ },
+ "8075": {
+  "text": "Credito d'imposta dell'8% per incubatori e acceleratori certificati che investono nel capitale di startup innovative, su un massimo di 500.000 € l'anno, mantenendo l'investimento per almeno 3 anni.",
+  "v": "2026-04-02",
+  "t": "Sportello credito d’imposta per investimenti degli incubator"
+ },
+ "8179": {
+  "text": "Contributi a fondo perduto fino a 700.000 € per case di produzione cinematografiche e audiovisive italiane o europee che girano in Calabria serie, film, documentari, corti, videoclip o contenuti web.",
+  "v": "2026-04-22",
+  "t": "Calabria Film Commission - Regolamento per la concessione di"
+ },
+ "8252": {
+  "text": "Voucher fino a 15.000 € a fondo perduto per piccoli editori di libri (meno di 10 dipendenti, nati prima del 2020, almeno 10 titoli in tre anni): fiere, digitalizzazione, assunzioni, vendite.",
+  "v": "2026-05-07",
+  "t": "Voucher di sostegno per i piccoli editori"
+ },
+ "8300": {
+  "text": "Premio di 2.000 € per donne che si sono distinte nella blue economy (impresa e innovazione, ambiente e ricerca e altre categorie). Si candidano storie professionali, non progetti da finanziare.",
+  "v": "2026-05-20",
+  "t": "Avviso pubblico invito a presentare candidature per la prima"
+ },
+ "8311": {
+  "text": "Contributo fino al 50% delle spese di formazione del personale (+10% per le PMI) per le imprese di autotrasporto merci per conto terzi e i loro consorzi. Fondo di 4,9 milioni ripartito tra le domande.",
+  "v": "2026-05-28",
+  "t": "Ministero delle infrastrutture e dei trasporti - Incentivi a"
+ },
+ "8343": {
+  "text": "Conto Termico 3.0: incentivi del GSE per piccoli interventi di efficienza energetica e impianti termici a fonti rinnovabili negli edifici (pompe di calore, solare termico e simili), anche per le imprese.",
+  "v": "2026-05-28",
+  "t": "Conto Termico 3.0 - Gestore Servizi Energetici S.p.A."
+ },
+ "8409": {
+  "text": "Brava Innovation Hub: 12 settimane di formazione e mentorship più 40.000 € a fondo perduto per startup, micro e piccole imprese femminili nate da meno di 5 anni in settori innovativi.",
+  "v": "2026-06-15",
+  "t": "Programma di accelerazione Brava Innovation Hub 2026 - INVIT"
+ },
+ "8478": {
+  "text": "Solo per aree industriali di Lazio e Marche: contributo fino al 100% delle spese e fino a 300.000 € per imprese manifatturiere che ammodernano o aprono unità produttive.",
+  "v": "2026-06-30",
+  "t": "Fondo di contrasto alla deindustrializzazione 2026 - INVITAL"
+ },
+ "8488": {
+  "text": "Fino a 50.000 € a fondo perduto per startup cyber (IA, dati, robotica, IoT, blockchain, quantum, crittografia) nate da meno di 5 anni, selezionate da incubatori e acceleratori (call 2026).",
+  "v": "2026-07-03",
+  "t": "Call per startup 2026 - Contributo a fondo perduto per \"atti"
+ },
+ "8653": {
+  "text": "Sea Modal Shift: incentivo per gli autotrasportatori che spostano le merci dalla strada alle navi, calcolato sui chilometri stradali evitati.",
+  "v": "2026-07-30",
+  "t": "Ministero delle Infrastrutture e dei Trasporti - Incentivo S"
+ },
+ "8689": {
+  "text": "Contributo a fondo perduto del 60% dei costi, fino a 300.000 €, per imprese italiane di produzione che partecipano in minoranza a un film in coproduzione internazionale.",
+  "v": "2026-08-06",
+  "t": "Bando per contributi selettivi alle opere cinematografiche r"
+ },
+ "8709": {
+  "text": "Credito d'imposta per le librerie (vendita al dettaglio di libri in negozi specializzati) sulle spese dell'anno precedente come IMU, TARI e contributi previdenziali.",
+  "v": "2026-09-11",
+  "t": "Tax Credit Librerie 2026 - Credito di imposta per gli eserce"
+ },
+ "8768": {
+  "text": "Solo Friuli Venezia Giulia: contributi a fondo perduto per imprese di manifattura, terziario e costruzioni che installano o potenziano impianti fotovoltaici per autoconsumo, anche con accumulo.",
+  "v": "2026-09-02",
+  "t": "Regione Friuli Venezia Giulia – Contributi alle imprese per "
+ },
+ "8787": {
+  "text": "Credito d'imposta per le imprese di autotrasporto merci conto terzi e passeggeri (veicoli Euro V e VI): rimborsa fino al 70% del rincaro del gasolio tra marzo e agosto 2026 rispetto a febbraio.",
+  "v": "2026-09-11",
+  "t": "Credito d'imposta a favore imprese di autotrasporto - ristor"
+ },
+ "8802": {
+  "text": "Voucher fino a 20.000 € a fondo perduto per PMI e lavoratori autonomi che acquistano servizi cloud e di cybersicurezza (firewall, antivirus, backup, software in cloud) da fornitori iscritti all'elenco del Ministero.",
+  "v": "2026-09-15",
+  "t": "Sostegno alla domanda di servizi di cloud computing e cyber "
+ },
+ "8831": {
+  "text": "Credito d'imposta fino al 60% dei costi di funzionamento per le sale cinematografiche (anno 2025).",
+  "v": "2026-09-24",
+  "t": "Bando Tax credit funzionamento sale cinematografiche - Anno "
+ }
+}

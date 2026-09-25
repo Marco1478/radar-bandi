@@ -130,7 +130,7 @@ function row(b) {
   const aid = b.a ? `<span class="aid">fino a ${eur(b.a)}</span>` : b.m ? `spesa fino a ${eur(b.m)}` : '';
   const form0 = b.f[0] ? esc(b.f[0]) : '';
   const meta = [aid, form0, esc(where(b)), b.l ? 'solo alcuni comuni' : ''].filter(Boolean).join(' · ');
-  return `<li><a class="row" href="${BASE}/bando/${esc(b.s)}/"><span class="stamp ${st.cls}">${st.text}${isNew ? '<span class="new">nuovo</span>' : ''}</span><span class="row-title">${esc(b.t)}</span><span class="row-meta">${meta}</span></a></li>`;
+  return `<li><a class="row" href="${BASE}/bando/${esc(b.s)}/"><span class="stamp ${st.cls}">${st.text}${isNew ? '<span class="new">nuovo</span>' : ''}</span><span class="row-title">${esc(b.t)}</span>${b.h ? `<span class="row-sum">${esc(b.h)}</span>` : ''}<span class="row-meta">${meta}</span></a></li>`;
 }
 
 const SORTS = {
