@@ -45,19 +45,29 @@ function subjectsFor(a) {
   return s;
 }
 
+// Quanto un bando è pertinente agli obiettivi scelti: 2 = specifico, 1 = generico (ammette quasi ogni
+// spesa o obiettivo, quindi il tag non dice molto), 0 = non pertinente.
+const SPECIFIC_COSTS = 3;
+const SPECIFIC_SCOPES = 3;
+function goalScore(b, a) {
+  if (!a.g.length) return 2;
+  let best = 0;
+  for (const g of a.g) {
+    const m = GOALS[g];
+    if ((m.scopes || []).some((s) => b.p.includes(s))) best = Math.max(best, b.p.length <= SPECIFIC_SCOPES ? 2 : 1);
+    if ((m.costs || []).some((c) => b.k.includes(c))) best = Math.max(best, b.k.length <= SPECIFIC_COSTS ? 2 : 1);
+  }
+  return best;
+}
+
 // I bandi "in arrivo" restano nella lista: sono quelli da preparare adesso.
 function matches(b, a) {
   if (a.r && !b.n && !b.r.includes(a.r)) return false;
   const subs = subjectsFor(a);
   if (subs.length && !b.u.some((u) => subs.includes(u))) return false;
   if (a.dim && a.chi === 'attiva' && b.z.length && !b.z.includes(a.dim) && !b.z.includes('Non classificabile/classificato')) return false;
-  if (a.g.length) {
-    const hit = a.g.some((g) => {
-      const m = GOALS[g];
-      return (m.costs || []).some((c) => b.k.includes(c)) || (m.scopes || []).some((s) => b.p.includes(s));
-    });
-    if (!hit) return false;
-  }
+  b._s = goalScore(b, a);
+  if (!b._s) return false;
   if (a.fp && !b.f.includes('Contributo/Fondo perduto')) return false;
   return true;
 }
@@ -133,6 +143,19 @@ function row(b) {
   return `<li><a class="row" href="${BASE}/bando/${esc(b.s)}/"><span class="stamp ${st.cls}">${st.text}${isNew ? '<span class="new">nuovo</span>' : ''}</span><span class="row-title">${esc(b.t)}</span>${b.h ? `<span class="row-sum">${esc(b.h)}</span>` : ''}<span class="row-meta">${meta}</span></a></li>`;
 }
 
+// Prima i bandi specifici, poi (se ci sono obiettivi scelti) quelli generici sotto un'intestazione.
+function listHtml(found, limit) {
+  const specific = found.filter((b) => b._s !== 1);
+  const generic = found.filter((b) => b._s === 1);
+  const rows = specific.slice(0, limit).map(row);
+  const left = limit - specific.length;
+  if (generic.length && left > 0) {
+    rows.push(`<li class="divider"><strong>Bandi generici (${generic.length})</strong>Ammettono quasi ogni tipo di spesa: controlla se il tuo progetto ci rientra davvero.</li>`);
+    rows.push(...generic.slice(0, left).map(row));
+  }
+  return rows.join('');
+}
+
 const SORTS = {
   close: (x, y) => (x.o > TODAY) - (y.o > TODAY) || x.v - y.v || (x.c || '9999').localeCompare(y.c || '9999'),
   aid: (x, y) => (y.a || y.m / 2 || 0) - (x.a || x.m / 2 || 0),
@@ -177,7 +200,7 @@ function render({ resetPaging = true } = {}) {
   if (!found.length) {
     list.innerHTML = `<li class="empty"><strong>Nessun bando corrisponde a tutte queste risposte.</strong>Togli uno degli obiettivi al punto 4 o scegli “Qualsiasi” al punto 5.</li>`;
   } else {
-    list.innerHTML = found.slice(0, shown).map(row).join('');
+    list.innerHTML = listHtml(found, shown);
   }
   const more = $('#more');
   more.hidden = found.length <= shown;
@@ -229,7 +252,7 @@ function preparePrint() {
   const a = lastAnswers || readAnswers();
   const today = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
   $('#print-head').innerHTML = `<p><strong>Radar Bandi — resoconto del ${today}</strong></p><p>Profilo: ${esc(printProfile(a))}</p><p>${lastFound.length} bandi trovati. Verifica sempre requisiti e scadenze sul bando ufficiale. Fonte: incentivi.gov.it (MIMIT), IODL 2.0.</p>`;
-  list.innerHTML = lastFound.map(row).join('');
+  list.innerHTML = listHtml(lastFound, Infinity);
   list.querySelectorAll('a.row').forEach((el) => el.insertAdjacentHTML('beforeend', `<span class="print-url">${esc(el.href)}</span>`));
 }
 

@@ -170,6 +170,8 @@ h2 { font: 800 24px/1.2 var(--f-titoli); margin: 0; letter-spacing: -0.01em; }
 .tab > li:nth-child(odd) { background: var(--banda); }
 .tab > li.loading, .tab > li.empty { padding: 22px 14px; background: transparent; color: var(--grigio); }
 .empty strong { color: var(--inchiostro); display: block; margin-bottom: 4px; }
+.tab > li.divider { background: transparent; padding: 22px 14px 10px; border-top: 1.5px solid var(--inchiostro); color: var(--grigio); font-size: 15px; }
+.divider strong { display: block; color: var(--inchiostro); font: 800 18px/1.3 var(--f-titoli); margin-bottom: 2px; }
 
 .row {
   display: grid; gap: 6px; padding: 14px 14px 15px;
