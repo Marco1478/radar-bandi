@@ -24,6 +24,7 @@ for (const b of data.bandi) {
   if (!o) continue;
   if (o.regions) Object.assign(b, { regions: o.regions, national: false });
   if (o.forms) b.forms = o.forms;
+  if (o.subjects) b.subjects = o.subjects;
   if (o.status) Object.assign(b, { status: o.status, checked: o.checked, evidence: o.evidence });
 }
 

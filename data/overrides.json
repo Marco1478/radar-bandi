@@ -85,5 +85,17 @@
   "status": "closed",
   "checked": "2026-09-25",
   "evidence": "Sito ICE: «concluso il 12 aprile 2024»."
+ },
+ "4467": {
+  "subjects": [
+   "Impresa"
+  ],
+  "why": "Il testo parla di imprese; la fonte indica 'Cittadino'"
+ },
+ "8336": {
+  "subjects": [
+   "Cooperative/Associazioni Non Profit"
+  ],
+  "why": "Rivolto a enti del Terzo settore; la fonte indica 'SU/PMI innovativa'"
  }
 }
